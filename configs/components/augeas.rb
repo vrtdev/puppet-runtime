@@ -11,11 +11,13 @@ component 'augeas' do |pkg, settings, platform|
     pkg.apply_patch 'resources/patches/augeas/augeas-1.13.0-patch_security_context-t_out.patch'
   when '1.8.1'
     pkg.md5sum '623ff89d71a42fab9263365145efdbfa'
+    pkg.url "http://download.augeas.net/augeas-#{pkg.get_version}.tar.gz"
   when '1.11.0'
     pkg.md5sum 'abf51f4c0cf3901d167f23687f60434a'
+    pkg.url "http://download.augeas.net/augeas-#{pkg.get_version}.tar.gz"
   when '1.12.0'
     pkg.md5sum '74f1c7b8550f4e728486091f6b907175'
-
+    pkg.url "http://download.augeas.net/augeas-#{pkg.get_version}.tar.gz"
     pkg.apply_patch 'resources/patches/augeas/augeas-1.12.0-allow-ad-groups-in-sudoers.patch'
     pkg.apply_patch 'resources/patches/augeas/augeas-1.12.0-allow-hyphen-postgresql-lens.patch'
   else

@@ -1,7 +1,8 @@
 component "libxml2" do |pkg, settings, platform|
   pkg.version '2.10.3'
-  pkg.sha256sum '26d2415e1c23e0aad8ca52358523fc9116a2eb6e4d4ef47577b1635c7cee3d5f'
-  pkg.url "#{settings[:buildsources_url]}/libxml2-#{pkg.get_version}.tar.gz"
+  pkg.sha256sum '3f9fb74bb02049f3454892c88d3e57a23e30a88a7d444a80064625af2f543898'
+  pkg.url "https://github.com/GNOME/libxml2/archive/refs/tags/v2.10.3.tar.gz"
+  pkg.mirror "#{settings[:buildsources_url]}/libxml2-#{pkg.get_version}.tar.gz"
 
   # Newer versions of libxml2 either ship as tar.xz or do not ship with a configure file
   # and require a newer version of GNU Autotools to generate. This causes problems with
