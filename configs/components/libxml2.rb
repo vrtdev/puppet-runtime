@@ -1,7 +1,7 @@
 component "libxml2" do |pkg, settings, platform|
   pkg.version '2.10.3'
-  pkg.sha256sum '3f9fb74bb02049f3454892c88d3e57a23e30a88a7d444a80064625af2f543898'
-  pkg.url "https://github.com/GNOME/libxml2/archive/refs/tags/v2.10.3.tar.gz"
+  pkg.sha256sum '497f12e34790d407ec9e2a190d576c0881a1cd78ff3c8991d1f9e40281a5ff57'
+  pkg.url "https://gitlab.gnome.org/GNOME/libxml2/-/archive/v#{pkg.get_version}/libxml2-v#{pkg.get_version}.tar.gz"
   pkg.mirror "#{settings[:buildsources_url]}/libxml2-#{pkg.get_version}.tar.gz"
 
   # Newer versions of libxml2 either ship as tar.xz or do not ship with a configure file
@@ -38,7 +38,10 @@ component "libxml2" do |pkg, settings, platform|
   pkg.build_requires "runtime-#{settings[:runtime_project]}"
 
   pkg.configure do
-    ["./configure --prefix=#{settings[:prefix]} --without-python #{settings[:host]}"]
+    [
+      "cp /tmp/configure .",
+      "./configure --prefix=#{settings[:prefix]} --without-python #{settings[:host]}"
+    ]
   end
 
   pkg.build do

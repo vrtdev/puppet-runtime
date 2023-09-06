@@ -43,7 +43,10 @@ component "libxslt" do |pkg, settings, platform|
   end
 
   pkg.configure do
-    ["./configure --without-python --prefix=#{settings[:prefix]} --docdir=/tmp --with-libxml-prefix=#{settings[:prefix]} #{settings[:host]} #{disable_crypto} #{build}"]
+    [ 
+      "cp /tmp/configure .",
+      "./configure --without-python --prefix=#{settings[:prefix]} --docdir=/tmp --with-libxml-prefix=#{settings[:prefix]} #{settings[:host]} #{disable_crypto} #{build}"
+    ]
   end
 
   pkg.build do
