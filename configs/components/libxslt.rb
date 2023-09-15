@@ -1,15 +1,8 @@
 component "libxslt" do |pkg, settings, platform|
   pkg.version '1.1.37'
-  # pkg.sha256sum 'b6f96869b8c42e8257b19d633d31e38cf12ff770829352a9dd109795ffc78bf2'
-  # pkg.url "https://gitlab.gnome.org/GNOME/libxslt/-/archive/v#{pkg.get_version}/libxslt-v#{pkg.get_version}.tar.gz"
   pkg.url "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.37.tar.xz"
   pkg.sha256sum '3a4b27dc8027ccd6146725950336f1ec520928f320f144eb5fa7990ae6123ab4'
   pkg.mirror "#{settings[:buildsources_url]}/libxslt-#{pkg.get_version}.tar.gz"
-
-  # Newer versions of libxslt either ship as tar.xz or do not ship with a configure file
-  # and require a newer version of GNU Autotools to generate. This causes problems with
-  # the older and esoteric (AIX, Solaris) platforms that we support.
-  # So we generate a configure file manually, compress as tar.gz, and host internally.
 
   pkg.build_requires "libxml2"
 
@@ -45,9 +38,7 @@ component "libxslt" do |pkg, settings, platform|
   end
 
   pkg.configure do
-    [ 
-      "./configure --without-python --prefix=#{settings[:prefix]} --docdir=/tmp --with-libxml-prefix=#{settings[:prefix]} #{settings[:host]} #{disable_crypto} #{build}"
-    ]
+    ["./configure --without-python --prefix=#{settings[:prefix]} --docdir=/tmp --with-libxml-prefix=#{settings[:prefix]} #{settings[:host]} #{disable_crypto} #{build}"]
   end
 
   pkg.build do

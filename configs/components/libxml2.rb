@@ -1,15 +1,8 @@
 component "libxml2" do |pkg, settings, platform|
   pkg.version '2.10.3'
-  # pkg.sha256sum '497f12e34790d407ec9e2a190d576c0881a1cd78ff3c8991d1f9e40281a5ff57'
-  # pkg.url "https://gitlab.gnome.org/GNOME/libxml2/-/archive/v#{pkg.get_version}/libxml2-v#{pkg.get_version}.tar.gz"
   pkg.url "https://download.gnome.org/sources/libxml2/2.10/libxml2-2.10.3.tar.xz"
   pkg.sha256sum '5d2cc3d78bec3dbe212a9d7fa629ada25a7da928af432c93060ff5c17ee28a9c'
   pkg.mirror "#{settings[:buildsources_url]}/libxml2-#{pkg.get_version}.tar.gz"
-
-  # Newer versions of libxml2 either ship as tar.xz or do not ship with a configure file
-  # and require a newer version of GNU Autotools to generate. This causes problems with
-  # the older and esoteric (AIX, Solaris) platforms that we support.
-  # So we generate a configure file manually, compress as tar.gz, and host internally.
 
   if platform.is_aix?
     if platform.name == 'aix-7.1-ppc'
@@ -40,9 +33,7 @@ component "libxml2" do |pkg, settings, platform|
   pkg.build_requires "runtime-#{settings[:runtime_project]}"
 
   pkg.configure do
-    [
-      "./configure --prefix=#{settings[:prefix]} --without-python #{settings[:host]}"
-    ]
+    ["./configure --prefix=#{settings[:prefix]} --without-python #{settings[:host]}"]
   end
 
   pkg.build do
